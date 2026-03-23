@@ -2,7 +2,7 @@ const CACHE_NAME = 'vitalix-v1';
 const ASSETS_TO_CACHE = [
   './index.html',
   './manifest.json',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600;700&display=swap'
 ];
 
 self.addEventListener('install', (event) => {
