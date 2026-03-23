@@ -24,8 +24,8 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // Network-first for API calls
-  if (request.url.includes('/api/')) {
+  // Network-first for API calls (only cache GET requests)
+  if (request.url.includes('/api/') && request.method === 'GET') {
     event.respondWith(
       fetch(request)
         .then((response) => {
