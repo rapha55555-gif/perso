@@ -1221,6 +1221,178 @@ input[type=file] { display: none; }
   cursor: pointer;
   padding: 0 4px;
 }
+
+/* ─── iOS INSTALL GUIDE MODAL ─── */
+.install-guide-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.install-guide-overlay.open { display: flex; }
+.install-guide {
+  width: 100%;
+  max-width: 380px;
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 24px 32px;
+  animation: fadeUp 0.3s cubic-bezier(.22,.68,0,1.2) both;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.install-guide::-webkit-scrollbar { display: none; }
+.install-guide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.install-guide-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  color: var(--text);
+  line-height: 1.3;
+}
+.install-guide-header p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.install-guide-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+.install-guide-close:hover { color: var(--text); }
+.install-step {
+  display: flex;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.install-step:last-child { border-bottom: none; }
+.step-number {
+  width: 32px;
+  height: 32px;
+  background: var(--lime2);
+  color: var(--lime);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-content {
+  flex: 1;
+}
+.step-content h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.step-content p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.step-icon-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: var(--s3);
+  border-radius: 6px;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+.step-icon-inline svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--teal);
+  fill: none;
+  stroke-width: 2;
+}
+.install-guide-footer {
+  margin-top: 18px;
+  text-align: center;
+}
+.install-guide-footer p {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.install-guide-footer .guide-done-btn {
+  margin-top: 14px;
+  background: var(--lime);
+  color: var(--bg);
+  border: none;
+  padding: 12px 32px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+
+/* ─── PROFILE INSTALL LINK ─── */
+.profile-install-link {
+  margin: 20px 20px 8px;
+  padding: 14px 18px;
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+.profile-install-link:hover { border-color: var(--lime); }
+.profile-install-link-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--lime2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.profile-install-link-icon svg { width: 18px; height: 18px; stroke: var(--lime); fill: none; }
+.profile-install-link-text {
+  flex: 1;
+}
+.profile-install-link-text h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1px;
+}
+.profile-install-link-text p {
+  font-size: 11px;
+  color: var(--muted);
+}
+.profile-install-link-arrow {
+  color: var(--muted);
+  font-size: 16px;
+}
 </style>
 </head>
 <body>
@@ -1631,6 +1803,18 @@ input[type=file] { display: none; }
         </div>
       </div>
 
+      <!-- Install App Link -->
+      <div class="profile-install-link" id="profile-install-link" onclick="showInstallGuide()">
+        <div class="profile-install-link-icon">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <div class="profile-install-link-text">
+          <h4>Installer Vitalix</h4>
+          <p>Ajouter l'app sur ton écran d'accueil</p>
+        </div>
+        <span class="profile-install-link-arrow">›</span>
+      </div>
+
     </div>
     <!-- /PROFILE -->
 
@@ -1682,6 +1866,48 @@ input[type=file] { display: none; }
 
 <!-- ─── TOAST ─── -->
 <div class="toast" id="toast"></div>
+
+<!-- ─── iOS INSTALL GUIDE MODAL ─── -->
+<div class="install-guide-overlay" id="install-guide-overlay" onclick="if(event.target===this)closeInstallGuide()">
+  <div class="install-guide">
+    <div class="install-guide-header">
+      <div>
+        <h3>Installer Vitalix sur ton iPhone</h3>
+        <p>Suis ces 3 étapes simples dans Safari</p>
+      </div>
+      <button class="install-guide-close" onclick="closeInstallGuide()">×</button>
+    </div>
+
+    <div class="install-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Ouvre dans Safari</h4>
+        <p>Assure-toi que cette page est ouverte dans <b>Safari</b> (pas Chrome, pas un navigateur interne). Si ce n'est pas le cas, copie l'URL et ouvre-la dans Safari.</p>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Appuie sur Partager <span class="step-icon-inline"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></span></h4>
+        <p>Appuie sur l'icône <b>Partager</b> en bas de l'écran (le carré avec la flèche vers le haut). C'est la barre de navigation Safari, tout en bas.</p>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>« Sur l'écran d'accueil »</h4>
+        <p>Fais défiler le menu et appuie sur <b>« Sur l'écran d'accueil »</b>. Puis appuie sur <b>« Ajouter »</b> en haut à droite. Vitalix apparaîtra comme une vraie app !</p>
+      </div>
+    </div>
+
+    <div class="install-guide-footer">
+      <p>Une fois installée, Vitalix s'ouvrira en plein écran comme une app native, avec toutes tes données sauvegardées.</p>
+      <button class="guide-done-btn" onclick="closeInstallGuide()">J'ai compris</button>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ── HEALTH DATA (with localStorage persistence) ── */
@@ -2089,13 +2315,21 @@ function installApp() {
       document.getElementById('install-banner').classList.remove('visible');
     });
   } else {
-    // iOS Safari — show instructions
-    toast('Utilise "Ajouter à l\'écran d\'accueil" dans le menu partage');
+    // iOS Safari — show step-by-step guide
+    showInstallGuide();
   }
 }
 
 function dismissInstall() {
   document.getElementById('install-banner').classList.remove('visible');
+}
+
+function showInstallGuide() {
+  document.getElementById('install-guide-overlay').classList.add('open');
+}
+
+function closeInstallGuide() {
+  document.getElementById('install-guide-overlay').classList.remove('open');
 }
 
 function isIOSSafariNotStandalone() {
@@ -2108,11 +2342,17 @@ if (isIOSSafariNotStandalone()) {
   const banner = document.getElementById('install-banner');
   if (banner && !deferredInstallPrompt) {
     banner.classList.add('visible');
-    document.getElementById('install-btn').textContent = 'Ajouter';
+    document.getElementById('install-btn').textContent = 'Guide';
     document.getElementById('install-btn').onclick = function() {
-      toast('Appuie sur le bouton Partager ⬆ puis "Sur l\'écran d\'accueil"');
+      showInstallGuide();
     };
   }
+}
+
+// Hide the profile install link if already in standalone mode
+if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+  const link = document.getElementById('profile-install-link');
+  if (link) link.style.display = 'none';
 }
 
 /* ══════════════════════════════════════════════
