@@ -2098,8 +2098,13 @@ function dismissInstall() {
   document.getElementById('install-banner').classList.remove('visible');
 }
 
+function isIOSSafariNotStandalone() {
+  return window.navigator.standalone === false ||
+    (navigator.userAgent.includes('iPhone') && !window.matchMedia('(display-mode: standalone)').matches);
+}
+
 // Show iOS install hint if in Safari and not already standalone
-if (window.navigator.standalone === false || (navigator.userAgent.includes('iPhone') && !window.matchMedia('(display-mode: standalone)').matches)) {
+if (isIOSSafariNotStandalone()) {
   const banner = document.getElementById('install-banner');
   if (banner && !deferredInstallPrompt) {
     banner.classList.add('visible');
@@ -2193,7 +2198,8 @@ async function requestHealthAccess() {
     }
   }
 
-  // Check for Web Health API (emerging standard)
+  // Web Health API — not yet implemented in browsers (future-proofing)
+  // This branch will activate when the standard is adopted by Safari/Chrome
   if ('health' in navigator) {
     try {
       const result = await navigator.health.requestAuthorization({
